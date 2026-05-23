@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clément & Yoann — Notre Mariage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --burnt-orange: #c4622d;
+      --amber: #d4882a;
+      --rust: #8b3a1a;
+      --deep-brown: #2d1a0e;
+      --warm-brown: #5c3317;
+      --cream: #f5ede0;
+      --parchment: #ede0cc;
+      --sand: #d4bfa0;
+      --forest: #4a5e3a;
+      --gold: #c9972a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--deep-brown); overflow-x: hidden; }
+
+    /* FEUILLES */
+    .leaves-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .leaf { position: absolute; top: -60px; opacity: 0.45; animation: fallLeaf linear infinite; font-size: 1.3rem; }
+    @keyframes fallLeaf {
+      0%   { transform: translateY(0) rotate(0deg) translateX(0); opacity: .55; }
+      50%  { transform: translateY(50vh) rotate(180deg) translateX(25px); opacity: .35; }
+      100% { transform: translateY(105vh) rotate(360deg) translateX(-15px); opacity: 0; }
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: center; gap: 2rem; padding: 1rem 2rem;
+      background: rgba(45,26,14,0.93); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,151,42,.3);
+    }
+    nav a { font-size: .64rem; letter-spacing: .25em; text-transform: uppercase; text-decoration: none; color: var(--sand); transition: color .3s; }
+    nav a:hover { color: var(--amber); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 8rem 2rem 5rem; position: relative;
+      background:
+        radial-gradient(ellipse 90% 70% at 50% 100%, rgba(139,58,26,.22) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 40% at 15% 30%, rgba(74,94,58,.14) 0%, transparent 55%),
+        var(--cream);
+    }
+    .hero-tag { font-size: .62rem; letter-spacing: .35em; text-transform: uppercase; color: var(--burnt-orange); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 1s ease .3s forwards; }
+    h1 { font-family: 'Playfair Display', serif; font-weight: 400; font-size: clamp(3.6rem,12vw,8rem); line-height: 1; color: var(--deep-brown); opacity: 0; animation: fadeUp 1.2s ease .5s forwards; }
+    h1 .name { display: block; }
+    h1 .amp { font-style: italic; color: var(--burnt-orange); font-size: .52em; display: block; margin: .12em 0; }
+    .hero-orn { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 2rem 0; opacity: 0; animation: fadeUp 1s ease .9s forwards; }
+    .hero-orn .hl { width: 60px; height: 1px; background: var(--gold); }
+    .hero-date { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.1rem,3vw,1.6rem); color: var(--warm-brown); opacity: 0; animation: fadeUp 1s ease 1.1s forwards; }
+    .hero-loc { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--forest); margin-top: .5rem; opacity: 0; animation: fadeUp 1s ease 1.25s forwards; }
+    .scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: .5rem; opacity: 0; animation: fadeUp 1s ease 1.6s forwards; }
+    .scroll-hint span { font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--amber); }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--amber), transparent); animation: spulse 2s ease-in-out infinite; }
+    @keyframes spulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+    /* GENERIC SECTION */
+    section { padding: 6rem 2rem; max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    .sec-label { font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; color: var(--burnt-orange); margin-bottom: .8rem; }
+    h2 { font-family: 'Playfair Display', serif; font-weight: 400; font-size: clamp(2rem,5vw,3rem); color: var(--deep-brown); margin-bottom: 1rem; line-height: 1.2; }
+    h2 em { font-style: italic; color: var(--burnt-orange); }
+    .orn { display: flex; align-items: center; gap: 1rem; margin: 1.2rem 0 2rem; }
+    .orn .ol { flex: 1; max-width: 80px; height: 1px; background: var(--sand); }
+    .orn .oi { color: var(--gold); }
+    p.bt { font-size: .9rem; line-height: 1.9; color: rgba(45,26,14,.72); max-width: 58ch; }
+
+    /* COUNTDOWN */
+    .countdown { display: flex; gap: 1.5rem; margin: 2.5rem 0; flex-wrap: wrap; }
+    .cd-block { text-align: center; min-width: 70px; }
+    .cd-num { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--burnt-orange); line-height: 1; display: block; }
+    .cd-label { font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--warm-brown); opacity: .7; display: block; margin-top: .3rem; }
+
+    /* PROGRAMME */
+    #prog-wrap { background: var(--deep-brown); padding: 6rem 2rem; position: relative; z-index: 1; }
+    #prog-wrap::before { content:''; position:absolute; top:0;left:0;right:0; height:4px; background:linear-gradient(90deg,var(--rust),var(--amber),var(--forest)); }
+    #prog-wrap .inner { max-width: 960px; margin: 0 auto; }
+    #prog-wrap .sec-label { color: var(--amber); }
+    #prog-wrap h2 { color: var(--cream); }
+    #prog-wrap h2 em { color: var(--amber); }
+    .timeline { margin-top: 3rem; }
+    .tl-item { display: grid; grid-template-columns: 88px 2px 1fr; gap: 0 2rem; padding-bottom: 2.5rem; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-time { font-family:'Playfair Display',serif; font-style:italic; font-size:1.35rem; color:var(--amber); text-align:right; padding-top:2px; }
+    .tl-line { background:rgba(201,151,42,.2); position:relative; }
+    .tl-line::before { content:''; position:absolute; top:8px; left:50%; transform:translateX(-50%); width:10px; height:10px; background:var(--burnt-orange); border-radius:50%; border:2px solid var(--amber); }
+    .tl-body strong { display:block; font-family:'Playfair Display',serif; font-size:1.12rem; color:var(--cream); margin-bottom:.3rem; font-weight:400; }
+    .tl-body p { font-size:.8rem; color:rgba(245,237,224,.5); line-height:1.7; max-width:none; }
+
+    /* LIEUX */
+    .lieu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:1.5rem; margin-top:2.5rem; }
+    .lieu-card { padding:2rem; border:1px solid var(--sand); background:var(--parchment); position:relative; overflow:hidden; transition:transform .3s,box-shadow .3s; }
+    .lieu-card:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(139,58,26,.12); }
+    .lieu-card::after { content:''; position:absolute; bottom:0;left:0;right:0; height:3px; background:linear-gradient(90deg,var(--burnt-orange),var(--amber)); }
+    .lieu-icon { font-size:1.9rem; margin-bottom:.9rem; }
+    .lieu-type { font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--burnt-orange); margin-bottom:.5rem; }
+    .lieu-card h3 { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:400; margin-bottom:.5rem; }
+    .lieu-card p { font-size:.82rem; color:rgba(45,26,14,.65); line-height:1.7; }
+    .lieu-card a { display:inline-block; margin-top:1rem; font-size:.67rem; letter-spacing:.15em; text-transform:uppercase; color:var(--burnt-orange); text-decoration:none; border-bottom:1px solid currentColor; padding-bottom:.1rem; transition:opacity .2s; }
+    .lieu-card a:hover { opacity:.6; }
+
+    /* RSVP */
+    #rsvp-wrap { background:var(--parchment); padding:6rem 2rem; position:relative; z-index:1; }
+    #rsvp-wrap .inner { max-width:620px; margin:0 auto; text-align:center; }
+    .rsvp-form { text-align:left; margin-top:2rem; display:grid; gap:1.2rem; }
+    .field-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    label { font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--warm-brown); display:block; margin-bottom:.4rem; }
+    input,select,textarea { width:100%; padding:.85rem 1rem; border:1px solid var(--sand); background:var(--cream); font-family:'Lato',sans-serif; font-size:.88rem; color:var(--deep-brown); outline:none; transition:border-color .3s; appearance:none; border-radius:0; }
+    input:focus,select:focus,textarea:focus { border-color:var(--burnt-orange); }
+    textarea { resize:vertical; min-height:90px; }
+    .btn { width:100%; padding:1rem; background:var(--deep-brown); color:var(--cream); font-family:'Lato',sans-serif; font-size:.68rem; letter-spacing:.3em; text-transform:uppercase; border:none; cursor:pointer; transition:background .3s; }
+    .btn:hover { background:var(--burnt-orange); }
+    .btn:disabled { opacity:.6; cursor:not-allowed; }
+    .rsvp-success { display:none; text-align:center; padding:2rem 0; }
+    .rsvp-success .big-icon { font-size:3rem; margin-bottom:1rem; }
+    .rsvp-success h3 { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:400; margin-bottom:.5rem; }
+    .rsvp-success p { font-size:.85rem; color:rgba(45,26,14,.6); max-width:none; }
+    .rsvp-err { display:none; background:#fdecea; border:1px solid #e57373; padding:.8rem 1rem; font-size:.82rem; color:#b71c1c; }
+
+    /* QUIZ */
+    #quiz-wrap { background:var(--deep-brown); padding:6rem 2rem; position:relative; z-index:1; }
+    #quiz-wrap::before { content:''; position:absolute; top:0;left:0;right:0; height:4px; background:linear-gradient(90deg,var(--forest),var(--amber),var(--rust)); }
+    #quiz-wrap .inner { max-width:700px; margin:0 auto; }
+    #quiz-wrap .sec-label { color:var(--amber); }
+    #quiz-wrap h2 { color:var(--cream); }
+    .quiz-prog { display:flex; align-items:center; gap:1rem; margin-bottom:2rem; }
+    .quiz-bar-bg { flex:1; height:4px; background:rgba(245,237,224,.12); border-radius:2px; overflow:hidden; }
+    .quiz-bar-fill { height:100%; background:linear-gradient(90deg,var(--burnt-orange),var(--amber)); transition:width .5s ease; }
+    .quiz-prog-txt { font-size:.63rem; letter-spacing:.15em; color:var(--amber); white-space:nowrap; }
+    .quiz-card { background:rgba(245,237,224,.05); border:1px solid rgba(201,151,42,.2); padding:2.5rem; }
+    .quiz-q { font-family:'Playfair Display',serif; font-style:italic; font-size:1.22rem; color:var(--cream); margin-bottom:2rem; line-height:1.5; }
+    .quiz-opts { display:grid; gap:.8rem; }
+    .quiz-opt { padding:.9rem 1.2rem; border:1px solid rgba(201,151,42,.22); background:transparent; color:rgba(245,237,224,.8); font-family:'Lato',sans-serif; font-size:.88rem; cursor:pointer; text-align:left; transition:all .25s; display:flex; align-items:center; gap:1rem; }
+    .quiz-opt:hover:not(.done) { border-color:var(--amber); color:var(--cream); background:rgba(201,151,42,.08); }
+    .opt-letter { width:28px; height:28px; border:1px solid rgba(201,151,42,.35); display:flex; align-items:center; justify-content:center; font-size:.74rem; flex-shrink:0; transition:all .25s; }
+    .quiz-opt.correct { background:rgba(74,94,58,.3); border-color:var(--forest); color:#a8d5a2; }
+    .quiz-opt.correct .opt-letter { background:var(--forest); border-color:var(--forest); color:#fff; }
+    .quiz-opt.wrong { background:rgba(139,58,26,.3); border-color:var(--rust); color:#f4a79d; }
+    .quiz-opt.wrong .opt-letter { background:var(--rust); border-color:var(--rust); color:#fff; }
+    .quiz-fb { display:none; margin-top:1.5rem; padding:1rem 1.2rem; font-size:.82rem; line-height:1.6; }
+    .quiz-fb.show { display:block; }
+    .quiz-fb.good { background:rgba(74,94,58,.2); border-left:3px solid var(--forest); color:#a8d5a2; }
+    .quiz-fb.bad  { background:rgba(139,58,26,.2); border-left:3px solid var(--rust); color:#f4a79d; }
+    .quiz-next { display:none; margin-top:1.5rem; }
+    .quiz-next.show { display:block; }
+    .btn-quiz { padding:.85rem 2.5rem; background:var(--burnt-orange); color:var(--cream); font-family:'Lato',sans-serif; font-size:.67rem; letter-spacing:.25em; text-transform:uppercase; border:none; cursor:pointer; transition:background .3s; }
+    .btn-quiz:hover { background:var(--amber); }
+    .quiz-result { display:none; text-align:center; padding:2rem 0; }
+    .quiz-result.show { display:block; }
+    .score-circle { width:140px; height:140px; border-radius:50%; border:3px solid var(--amber); display:flex; flex-direction:column; align-items:center; justify-content:center; margin:0 auto 2rem; }
+    .score-num { font-family:'Playfair Display',serif; font-size:3rem; color:var(--amber); line-height:1; }
+    .score-total { font-size:.68rem; color:rgba(245,237,224,.45); letter-spacing:.15em; }
+    .score-msg { font-family:'Playfair Display',serif; font-style:italic; font-size:1.5rem; color:var(--cream); margin-bottom:.7rem; }
+    .score-sub { font-size:.82rem; color:rgba(245,237,224,.5); }
+
+    /* INFOS */
+    .info-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:2rem; margin-top:2.5rem; }
+    .info-icon { font-size:1.6rem; margin-bottom:.8rem; }
+    .info-block h4 { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:400; margin-bottom:.4rem; }
+    .info-block p { font-size:.82rem; color:rgba(45,26,14,.65); line-height:1.7; }
+
+    /* FOOTER */
+    footer { background:var(--deep-brown); color:var(--cream); text-align:center; padding:3rem 2rem; position:relative; z-index:1; }
+    .footer-names { font-family:'Playfair Display',serif; font-style:italic; font-size:2.2rem; font-weight:400; margin-bottom:.5rem; }
+    .footer-names span { color:var(--amber); }
+    footer p { font-size:.67rem; opacity:.35; letter-spacing:.1em; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .8s ease,transform .8s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
+
+    @media(max-width:600px){
+      nav{gap:.9rem;flex-wrap:wrap}
+      .field-row{grid-template-columns:1fr}
+      .tl-item{grid-template-columns:62px 2px 1fr;gap:0 1rem}
+      .countdown{gap:1rem} .cd-num{font-size:2.2rem}
+      .quiz-card{padding:1.5rem}
+    }
+  </style>
+</head>
+<body>
+
+<div class="leaves-container" id="leaves"></div>
+
+<nav>
+  <a href="#hero">Accueil</a>
+  <a href="#prog-wrap">Programme</a>
+  <a href="#lieux">Lieux</a>
+  <a href="#rsvp-wrap">RSVP</a>
+  <a href="#quiz-wrap">Quiz</a>
+  <a href="#infos">Infos</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-tag">Nous avons l'honneur de vous inviter à célébrer</p>
+  <h1>
+    <span class="name">Clément</span>
+    <span class="amp">&amp;</span>
+    <span class="name">Yoann</span>
+  </h1>
+  <div class="hero-orn">
+    <div class="hl"></div>
+    <span style="font-size:1.1rem">🍂</span>
+    <div class="hl"></div>
+  </div>
+  <p class="hero-date">Samedi 10 octobre 2026</p>
+  <p class="hero-loc">Le logis d'Arnière — Saint-Cyr-sous-Dourdan</p>
+  <div class="scroll-hint">
+    <span>Découvrir</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- HISTOIRE -->
+<section id="histoire">
+  <p class="sec-label reveal">Notre histoire</p>
+  <h2 class="reveal">Un automne<br><em>pour toujours</em></h2>
+  <div class="orn reveal"><div class="ol"></div><span class="oi">🍁</span><div class="ol"></div></div>
+  <p class="bt reveal">Une rencontre un soir d'octobre, des feuilles qui tombaient, et deux cœurs qui n'ont plus voulu se quitter. Aujourd'hui, nous vous invitons à partager avec nous le plus beau des jours d'automne.</p>
+  <br>
+  <p class="bt reveal d1">Entourés de ceux que nous aimons, dans la douceur de l'arrière-saison languedocienne, nous célébrons notre amour et notre avenir commun.</p>
+  <div class="countdown reveal d2">
+    <div class="cd-block"><span class="cd-num" id="cd-j">—</span><span class="cd-label">Jours</span></div>
+    <div class="cd-block"><span class="cd-num" id="cd-h">—</span><span class="cd-label">Heures</span></div>
+    <div class="cd-block"><span class="cd-num" id="cd-m">—</span><span class="cd-label">Minutes</span></div>
+    <div class="cd-block"><span class="cd-num" id="cd-s">—</span><span class="cd-label">Secondes</span></div>
+  </div>
+</section>
+
+<!-- PROGRAMME -->
+<div id="prog-wrap">
+  <div class="inner">
+    <p class="sec-label reveal">Le déroulé</p>
+    <h2 class="reveal">Programme <em>de la journée</em></h2>
+    <div class="orn reveal"><div class="ol" style="background:rgba(201,151,42,.25)"></div><span class="oi">🍂</span><div class="ol" style="background:rgba(201,151,42,.25)"></div></div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <span class="tl-time">16h</span>
+        <div class="tl-line"></div>
+        <div class="tl-body"><strong>Accueil des invités</strong><p>À l'entrée du Château, sous les platanes aux couleurs d'automne.</p></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">17h</span>
+        <div class="tl-line"></div>
+        <div class="tl-body"><strong>Cérémonie laïque</strong><p>Dans la cour du château, entourés de guirlandes dorées et de feuilles séchées.</p></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">18h</span>
+        <div class="tl-line"></div>
+        <div class="tl-body"><strong>Vin d'honneur</strong><p>Cocktail en terrasse avec vue sur les vignes. Vins du terroir, cidre artisanal & petites bouchées.</p></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">20h</span>
+        <div class="tl-line"></div>
+        <div class="tl-body"><strong>Dîner de gala</strong><p>Dans la grande salle voûtée, décorée de citrouilles, fougères et bougies ambrées.</p></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">22h00</span>
+        <div class="tl-line"></div>
+        <div class="tl-body"><strong>Soirée & Danse</strong><p>DJ set dans la cour illuminée. La piste est ouverte jusqu'au bout de la nuit !</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIEUX -->
+<section id="lieux">
+  <p class="sec-label reveal">Où nous retrouver</p>
+  <h2 class="reveal">Les <em>lieux</em></h2>
+  <div class="orn reveal"><div class="ol"></div><span class="oi">🍁</span><div class="ol"></div></div>
+  <div class="lieu-grid reveal">
+    <div class="lieu-card">
+      <div class="lieu-icon">🏰</div>
+      <div class="lieu-type">Cérémonie & Réception</div>
+      <h3>Le logis d'Arnière</h3>
+      <p>1 Rue du Pont Rue,<br> 91410 Saint-Cyr-sous-Dourdan</p>
+      <a href="https://maps.app.goo.gl/R7GXnrgEm4SikXnE7" target="_blank">Voir sur Google Maps →</a>
+    </div>
+    <div class="lieu-card">
+      <div class="lieu-icon">🏨</div>
+      <div class="lieu-type">Hébergement suggéré</div>
+      <h3>A FAIRE</h3>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<div id="rsvp-wrap">
+  <div class="inner">
+    <p class="sec-label reveal">Confirmer votre présence</p>
+    <h2 class="reveal">RSVP</h2>
+    <p class="bt reveal" style="margin:0 auto .5rem;text-align:center">Merci de confirmer avant le <strong>XX XXXX 2026</strong>.</p>
+
+    <!-- iframe invisible qui reçoit la réponse de Google Forms -->
+    <iframe name="rsvp-iframe" style="display:none"></iframe>
+
+    <form
+      class="rsvp-form reveal"
+      id="rsvp-form"
+      action="https://docs.google.com/forms/d/e/1FAIpQLScI90Tf95hJvMTUqKvKweLG_kkhZGHw_l6CfKGssO2prWyG1A/formResponse"
+      method="POST"
+      target="rsvp-iframe"
+      onsubmit="handleRSVP(event)"
+    >
+      <div class="field-row">
+        <div><label for="nom">Nom</label><input type="text" name="entry.1869105317" id="nom" placeholder="Dupont" required></div>
+        <div><label for="prenom">Prénom</label><input type="text" name="entry.916912191" id="prenom" placeholder="Marie" required></div>
+      </div>
+      <div><label for="mail">Adresse e-mail</label><input type="email" name="entry.290749565" id="mail" placeholder="marie.dupont@email.com"></div>
+      <div>
+        <label for="alimentation">Régime alimentaire</label>
+        <select name="entry.723399231" id="alimentation">
+          <option value="Aucune restriction">— Aucune restriction particulière —</option>
+          <option value="Végétarien">Végétarien</option>
+          <option value="Vegan">Vegan</option>
+          <option value="Sans gluten">Sans gluten</option>
+          <option value="Allergie fruits à coque">Allergie aux fruits à coque</option>
+          <option value="Autre - voir message">Autre (préciser dans le message)</option>
+        </select>
+      </div>
+      <div>
+        <label for="message">Message pour les mariés 💌</label>
+        <textarea name="entry.1082687308" id="message" placeholder="Un mot doux, une chanson à demander, ou vos souhaits…"></textarea>
+      </div>
+      <button type="submit" class="btn">Confirmer ma présence</button>
+    </form>
+
+    <div class="rsvp-success" id="rsvp-ok">
+      <div class="big-icon">🍂</div>
+      <h3>Merci !</h3>
+      <p>Votre réponse a bien été enregistrée.<br>Nous avons hâte de vous retrouver !</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-wrap">
+  <div class="inner">
+    <p class="sec-label reveal">Vous nous connaissez bien ?</p>
+    <h2 class="reveal">Le <em>Grand Quiz</em><br>du Mariage 🍁</h2>
+    <div class="orn reveal"><div class="ol" style="background:rgba(201,151,42,.2)"></div><span class="oi">🍂</span><div class="ol" style="background:rgba(201,151,42,.2)"></div></div>
+
+    <div class="reveal">
+      <div class="quiz-prog" id="quiz-prog">
+        <div class="quiz-bar-bg"><div class="quiz-bar-fill" id="quiz-bar" style="width:0%"></div></div>
+        <span class="quiz-prog-txt" id="quiz-ctr">Question 1 / 10</span>
+      </div>
+
+      <div class="quiz-card" id="quiz-card">
+        <p class="quiz-q" id="quiz-q"></p>
+        <div class="quiz-opts" id="quiz-opts"></div>
+        <div class="quiz-fb" id="quiz-fb"></div>
+        <div class="quiz-next" id="quiz-next">
+          <button class="btn-quiz" onclick="nextQ()">Question suivante →</button>
+        </div>
+      </div>
+
+      <div class="quiz-result" id="quiz-result">
+        <div class="score-circle">
+          <span class="score-num" id="score-num">0</span>
+          <span class="score-total">/ 10</span>
+        </div>
+        <p class="score-msg" id="score-msg"></p>
+        <p class="score-sub" id="score-sub"></p>
+        <br>
+        <button class="btn-quiz" onclick="restartQuiz()" style="margin-top:1rem">Rejouer 🍂</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INFOS -->
+<section id="infos">
+  <p class="sec-label reveal">À savoir</p>
+  <h2 class="reveal">Infos <em>pratiques</em></h2>
+  <div class="orn reveal"><div class="ol"></div><span class="oi">🍁</span><div class="ol"></div></div>
+  <div class="info-grid reveal">
+    <div class="info-block"><div class="info-icon">🧥</div><h4>Tenue</h4><p>Tenue élégante en tons automnaux bienvenue. Prévoyez une veste — les nuits d'octobre peuvent être fraîches.</p></div>
+    <div class="info-block"><div class="info-icon">🎁</div><h4>Cadeaux</h4><p>Votre présence est notre plus beau cadeau. Une cagnotte en ligne sera disponible pour ceux qui souhaitent contribuer.</p></div>
+    <div class="info-block"><div class="info-icon">📸</div><h4>Photos</h4><p>Un photographe professionnel sera présent. Partagez vos clichés avec <strong>#ClementEtYoann2026</strong></p></div>
+    <div class="info-block"><div class="info-icon">🌤️</div><h4>Météo</h4><p>Octobre à Pézenas : douceur et lumière dorée. Attendez-vous à des teintes de feu partout où vous regarderez !</p></div>
+    <div class="info-block"><div class="info-icon">🍼</div><h4>Enfants</h4><p>Les enfants sont les bienvenus. Un espace baby-sitting animé sera disponible pendant la soirée.</p></div>
+    <div class="info-block"><div class="info-icon">✉️</div><h4>Contact</h4><p>Des questions ?<br><a href="mailto:clement.yoann.2026@gmail.com" style="color:var(--burnt-orange)">clement.yoann.2026@gmail.com</a></p></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-names">Clément <span>&</span> Yoann</div>
+  <div style="color:var(--amber);opacity:.3;font-size:.9rem;letter-spacing:.8em;margin:.6rem 0">🍁 🍂 🍁</div>
+  <p>10 octobre 2026 — Château de Roquelune, Pézenas</p>
+</footer>
+
+<script>
+// ── FEUILLES ──
+const EMOJIS = ['🍂','🍁','🍃','🌿'];
+const lc = document.getElementById('leaves');
+for (let i = 0; i < 20; i++) {
+  const l = document.createElement('div');
+  l.className = 'leaf';
+  l.textContent = EMOJIS[i % EMOJIS.length];
+  l.style.left = (Math.random() * 100) + 'vw';
+  l.style.fontSize = (.9 + Math.random() * 1.1) + 'rem';
+  l.style.opacity = (.2 + Math.random() * .35).toString();
+  const dur = 9 + Math.random() * 11;
+  l.style.animationDuration = dur + 's';
+  l.style.animationDelay = -(Math.random() * dur) + 's';
+  lc.appendChild(l);
+}
+
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: .1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── COUNTDOWN ──
+function updateCD() {
+  const diff = new Date('2026-10-10T14:30:00').getTime() - Date.now();
+  if (diff <= 0) { ['cd-j','cd-h','cd-m','cd-s'].forEach(id => document.getElementById(id).textContent = '0'); return; }
+  document.getElementById('cd-j').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+}
+updateCD(); setInterval(updateCD, 1000);
+
+// ── RSVP → GOOGLE FORMS (méthode iframe) ──
+function handleRSVP(e) {
+  // Le form se soumet normalement dans l'iframe caché
+  // On attend un court délai puis on affiche le message de succès
+  setTimeout(function() {
+    document.getElementById('rsvp-form').style.display = 'none';
+    document.getElementById('rsvp-ok').style.display = 'block';
+  }, 800);
+}
+
+// ── QUIZ ──
+const QUESTIONS = [
+  { q: "Où Clément et Yoann se sont-ils rencontrés pour la première fois ?", opts: ["À une soirée entre amis","Dans un café du quartier","Lors d'un voyage à l'étranger","Via une application"], ans: 0, fb: "C'est lors d'une soirée entre amis que nos deux compères ont échangé leur premier regard ! 🥂" },
+  { q: "En quelle saison a eu lieu leur premier rendez-vous officiel ?", opts: ["Printemps","Été","Automne","Hiver"], ans: 2, fb: "Un premier rendez-vous sous les feuilles dorées de l'automne — le décor était déjà tout trouvé pour le mariage ! 🍂" },
+  { q: "Quel est le plat préféré de Clément ?", opts: ["La raclette","Le risotto aux cèpes","La brandade de morue","Le cassoulet"], ans: 1, fb: "Le risotto aux cèpes, un plat d'automne par excellence ! 🍄" },
+  { q: "Quel sport Yoann pratique-t-il régulièrement ?", opts: ["Le tennis","La randonnée","Le vélo de route","La natation"], ans: 2, fb: "Yoann est un cycliste passionné, toujours prêt à dévaler les routes du Languedoc ! 🚴" },
+  { q: "Dans quelle ville le couple a-t-il passé son premier voyage ensemble ?", opts: ["Rome","Lisbonne","Prague","Amsterdam"], ans: 1, fb: "Lisbonne et ses azulejos bleus — un premier voyage inoubliable ! 🌊" },
+  { q: "Depuis combien de temps sont-ils en couple avant ce mariage ?", opts: ["2 ans","4 ans","6 ans","8 ans"], ans: 1, fb: "4 belles années de complicité, de rires et d'aventures partagées ! 💛" },
+  { q: "Quel est l'animal de compagnie du couple ?", opts: ["Un chat roux nommé Gaston","Un labrador nommé Caramel","Ils n'ont pas d'animal","Deux lapins nains"], ans: 0, fb: "Gaston le chat roux règne en maître sur leur appartement depuis 3 ans ! 🐱" },
+  { q: "Où Yoann a-t-il fait sa demande en mariage à Clément ?", opts: ["Au sommet du Mont Ventoux","Dans leur restaurant préféré","Sur la plage à l'aube","À la maison, un soir de novembre"], ans: 2, fb: "Sur la plage, au lever du soleil — Clément a dit oui avant même la fin de la question ! 🌅" },
+  { q: "Quelle est leur destination de voyage de noces ?", opts: ["Le Japon en automne","La Patagonie","Le Maroc","L'Islande"], ans: 0, fb: "Le Japon en automne pour admirer les érables rouges (momiji) — parfait pour deux amoureux de l'automne ! 🗾🍁" },
+  { q: "Quel film regardent-ils chaque année à Halloween ?", opts: ["Beetlejuice","The Shining","Coco","Fantômes contre Fantômes"], ans: 2, fb: "Coco, pour les larmes garanties et l'ambiance chaleureuse. Un classique incontournable ! 🎭" }
+];
+
+let curQ = 0, score = 0, answered = false;
+const LETTERS = ['A','B','C','D'];
+
+function renderQ() {
+  const q = QUESTIONS[curQ];
+  document.getElementById('quiz-q').textContent = q.q;
+  document.getElementById('quiz-bar').style.width = (curQ / QUESTIONS.length * 100) + '%';
+  document.getElementById('quiz-ctr').textContent = `Question ${curQ+1} / ${QUESTIONS.length}`;
+
+  const optsEl = document.getElementById('quiz-opts');
+  optsEl.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.innerHTML = `<span class="opt-letter">${LETTERS[i]}</span>${opt}`;
+    btn.onclick = () => selectAns(i);
+    optsEl.appendChild(btn);
+  });
+
+  document.getElementById('quiz-fb').className = 'quiz-fb';
+  document.getElementById('quiz-fb').textContent = '';
+  document.getElementById('quiz-next').className = 'quiz-next';
+  answered = false;
+}
+
+function selectAns(idx) {
+  if (answered) return;
+  answered = true;
+  const q = QUESTIONS[curQ];
+  const opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach(o => o.classList.add('done'));
+  opts[q.ans].classList.add('correct');
+  if (idx !== q.ans) opts[idx].classList.add('wrong');
+  else score++;
+
+  const fb = document.getElementById('quiz-fb');
+  fb.textContent = q.fb;
+  fb.className = 'quiz-fb show ' + (idx === q.ans ? 'good' : 'bad');
+
+  const nxt = document.getElementById('quiz-next');
+  nxt.className = 'quiz-next show';
+  if (curQ === QUESTIONS.length - 1) nxt.querySelector('button').textContent = 'Voir mon score 🍁';
+}
+
+function nextQ() {
+  curQ++;
+  if (curQ >= QUESTIONS.length) showResult();
+  else renderQ();
+}
+
+function showResult() {
+  document.getElementById('quiz-card').style.display = 'none';
+  document.getElementById('quiz-prog').style.display = 'none';
+  const res = document.getElementById('quiz-result');
+  res.className = 'quiz-result show';
+  document.getElementById('score-num').textContent = score;
+
+  let msg, sub;
+  if (score <= 3)      { msg = "Vous faites connaissance ! 🌱"; sub = "Venez nous parler le soir du mariage, on a plein d'anecdotes à partager !"; }
+  else if (score <= 6) { msg = "Pas mal du tout ! 🍂"; sub = "Vous connaissez l'essentiel. On vous réserve quelques surprises pour le grand jour !"; }
+  else if (score <= 8) { msg = "Impressionnant ! 🍁"; sub = "Vous êtes clairement parmi nos proches. On vous aime fort !"; }
+  else                 { msg = "Notre meilleur(e) ami(e) ! 🏆"; sub = "Score exceptionnel — vous méritez la première danse avec les mariés !"; }
+
+  document.getElementById('score-msg').textContent = msg;
+  document.getElementById('score-sub').textContent = sub;
+}
+
+function restartQuiz() {
+  curQ = 0; score = 0; answered = false;
+  document.getElementById('quiz-card').style.display = 'block';
+  document.getElementById('quiz-prog').style.display = 'flex';
+  document.getElementById('quiz-result').className = 'quiz-result';
+  renderQ();
+}
+
+renderQ();
+</script>
+</body>
+</html>
