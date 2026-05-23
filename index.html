@@ -251,27 +251,27 @@
       <div class="tl-item">
         <span class="tl-time">16h</span>
         <div class="tl-line"></div>
-        <div class="tl-body"><strong>Accueil des invités</strong><p>À l'entrée du Château, sous les platanes aux couleurs d'automne.</p></div>
+        <div class="tl-body"><strong>Accueil des invités</strong><p>À l'entrée du Logis.</p></div>
       </div>
       <div class="tl-item">
         <span class="tl-time">17h</span>
         <div class="tl-line"></div>
-        <div class="tl-body"><strong>Cérémonie laïque</strong><p>Dans la cour du château, entourés de guirlandes dorées et de feuilles séchées.</p></div>
+        <div class="tl-body"><strong>Cérémonie laïque</strong><p>Dans le jardin.</p></div>
       </div>
       <div class="tl-item">
         <span class="tl-time">18h</span>
         <div class="tl-line"></div>
-        <div class="tl-body"><strong>Vin d'honneur</strong><p>Cocktail en terrasse avec vue sur les vignes. Vins du terroir, cidre artisanal & petites bouchées.</p></div>
+        <div class="tl-body"><strong>Vin d'honneur</strong><p>Champagnes dans le logis.</p></div>
       </div>
       <div class="tl-item">
         <span class="tl-time">20h</span>
         <div class="tl-line"></div>
-        <div class="tl-body"><strong>Dîner de gala</strong><p>Dans la grande salle voûtée, décorée de citrouilles, fougères et bougies ambrées.</p></div>
+        <div class="tl-body"><strong>Dîner</strong><p>Dans la grande salle du logis, dans une ambiance automnale.</p></div>
       </div>
       <div class="tl-item">
-        <span class="tl-time">22h00</span>
+        <span class="tl-time">23h00</span>
         <div class="tl-line"></div>
-        <div class="tl-body"><strong>Soirée & Danse</strong><p>DJ set dans la cour illuminée. La piste est ouverte jusqu'au bout de la nuit !</p></div>
+        <div class="tl-body"><strong>Soirée & Danse</strong><p>DJ set dans la grand salle. La piste est ouverte jusqu'au bout de la nuit !</p></div>
       </div>
     </div>
   </div>
@@ -293,7 +293,7 @@
     <div class="lieu-card">
       <div class="lieu-icon">🏨</div>
       <div class="lieu-type">Hébergement suggéré</div>
-      <h3>A FAIRE</h3>
+      <h3> <a href="https://www.airbnb.fr/s/1-Rue-du-Pont-Rue--Saint~Cyr~sous~Dourdan/homes?refinement_paths%5B%5D=%2Fhomes&date_picker_type=calendar&place_id=ChIJIwNtwAkt5EcR_s3PuButSWw&acp_id=t-g-ChIJIwNtwAkt5EcR_s3PuButSWw&checkin=2026-10-10&checkout=2026-10-11&adults=1&search_type=autocomplete_click" target="_blank">AirBnB</a></h3>
     </div>
   </div>
 </section>
@@ -303,7 +303,7 @@
   <div class="inner">
     <p class="sec-label reveal">Confirmer votre présence</p>
     <h2 class="reveal">RSVP</h2>
-    <p class="bt reveal" style="margin:0 auto .5rem;text-align:center">Merci de confirmer avant le <strong>XX XXXX 2026</strong>.</p>
+    <p class="bt reveal" style="margin:0 auto .5rem;text-align:center">Merci de confirmer avant le <strong>5 juillet 2026</strong>.</p>
 
     <!-- iframe invisible qui reçoit la réponse de Google Forms -->
     <iframe name="rsvp-iframe" style="display:none"></iframe>
@@ -328,7 +328,7 @@
           <option value="Végétarien">Végétarien</option>
           <option value="Vegan">Vegan</option>
           <option value="Sans gluten">Sans gluten</option>
-          <option value="Allergie fruits à coque">Allergie aux fruits à coque</option>
+          <option value="Allergie fruits à coque">Allergie aux fruits à coque (comme Yoyo)</option>
           <option value="Autre - voir message">Autre (préciser dans le message)</option>
         </select>
       </div>
@@ -451,16 +451,116 @@ function handleRSVP(e) {
 
 // ── QUIZ ──
 const QUESTIONS = [
-  { q: "Où Clément et Yoann se sont-ils rencontrés pour la première fois ?", opts: ["À une soirée entre amis","Dans un café du quartier","Lors d'un voyage à l'étranger","Via une application"], ans: 0, fb: "C'est lors d'une soirée entre amis que nos deux compères ont échangé leur premier regard ! 🥂" },
-  { q: "En quelle saison a eu lieu leur premier rendez-vous officiel ?", opts: ["Printemps","Été","Automne","Hiver"], ans: 2, fb: "Un premier rendez-vous sous les feuilles dorées de l'automne — le décor était déjà tout trouvé pour le mariage ! 🍂" },
-  { q: "Quel est le plat préféré de Clément ?", opts: ["La raclette","Le risotto aux cèpes","La brandade de morue","Le cassoulet"], ans: 1, fb: "Le risotto aux cèpes, un plat d'automne par excellence ! 🍄" },
-  { q: "Quel sport Yoann pratique-t-il régulièrement ?", opts: ["Le tennis","La randonnée","Le vélo de route","La natation"], ans: 2, fb: "Yoann est un cycliste passionné, toujours prêt à dévaler les routes du Languedoc ! 🚴" },
-  { q: "Dans quelle ville le couple a-t-il passé son premier voyage ensemble ?", opts: ["Rome","Lisbonne","Prague","Amsterdam"], ans: 1, fb: "Lisbonne et ses azulejos bleus — un premier voyage inoubliable ! 🌊" },
-  { q: "Depuis combien de temps sont-ils en couple avant ce mariage ?", opts: ["2 ans","4 ans","6 ans","8 ans"], ans: 1, fb: "4 belles années de complicité, de rires et d'aventures partagées ! 💛" },
-  { q: "Quel est l'animal de compagnie du couple ?", opts: ["Un chat roux nommé Gaston","Un labrador nommé Caramel","Ils n'ont pas d'animal","Deux lapins nains"], ans: 0, fb: "Gaston le chat roux règne en maître sur leur appartement depuis 3 ans ! 🐱" },
-  { q: "Où Yoann a-t-il fait sa demande en mariage à Clément ?", opts: ["Au sommet du Mont Ventoux","Dans leur restaurant préféré","Sur la plage à l'aube","À la maison, un soir de novembre"], ans: 2, fb: "Sur la plage, au lever du soleil — Clément a dit oui avant même la fin de la question ! 🌅" },
-  { q: "Quelle est leur destination de voyage de noces ?", opts: ["Le Japon en automne","La Patagonie","Le Maroc","L'Islande"], ans: 0, fb: "Le Japon en automne pour admirer les érables rouges (momiji) — parfait pour deux amoureux de l'automne ! 🗾🍁" },
-  { q: "Quel film regardent-ils chaque année à Halloween ?", opts: ["Beetlejuice","The Shining","Coco","Fantômes contre Fantômes"], ans: 2, fb: "Coco, pour les larmes garanties et l'ambiance chaleureuse. Un classique incontournable ! 🎭" }
+  // Question 1
+  { q: "Où Clément et Yoann se sont-ils rencontrés pour la première fois ?",
+    opts: [
+      "À Disney",
+      "Lors d'un cours à la fac",
+      "Lors de l'émission 'Mariés au premier regard'",
+      "Via une application"
+    ],
+    ans: 3, 
+    fb: "C'est grâce à une application que nos deux compères ont échangé leur premier regard ! 📱" 
+  },
+  // Question 2
+  { q: "En quelle saison a eu lieu leur premier rendez-vous officiel ?",
+    opts: [
+      "Printemps",
+      "Été",
+      "Automne",
+      "Hiver"
+    ], 
+    ans: 0,
+    fb: "Les premières floraisons ont accompagné leur premier rendez-vous ! 🌷" 
+  },
+  // Question 3
+  { q: "Quel est le dessert préféré de Clément ? 🍰",
+    opts: [
+      "Tarte au citron",
+      "Gâteau basque avec des fraises",
+      "Galette des rois",
+      "Le cassoulet"
+    ], 
+    ans: 1, 
+    fb: "L'association des fraises et du gâteau basque comble les papilles de Clément 🍓"
+  },
+  // Question 4
+  { q: "C'est connu, Yoann Adore Disney mais quel est son méchant préféré ? 👺",
+    opts: [
+      "La méchante reine - Blanche neige",
+      "Cruella - Les 101 dalmatien",
+      "La reine de Coeur - Alice au pays des merveilles",
+      "Capitaine Crochet - Peter Pan"
+    ],
+    ans: 0,
+    fb: "Yoann adore La méchante reine aussi appelé la Reine-Sorcière 🧙‍♀️"
+  },
+  // Question 5
+  { q: "Quelle est la première ville où le couple a-t-il passé son premier voyage ensemble ?", 
+    opts: [
+      "Saint-Cyr-Sous-Dourdan",
+      "Nantes",
+      "Prague",
+      "Amsterdam"
+    ],
+    ans: 1,
+    fb: "Nantes — un premier voyage riche en souvenirs !"
+  },
+  // Question 6
+  { q: "Depuis combien de temps vivent-ils ensemble ?", 
+    opts: [
+      "2 ans",
+      "4 ans",
+      "6 ans",
+      "8 ans"
+    ],
+    ans: 1,
+    fb: "4 belles années de complicité sous le même toit 💛"
+  },
+  // Question 7
+  { q: "Quel est l'animal de compagnie du couple ?",
+    opts: [
+      "Un voleur de croquettes",
+      "Un manipulateur prêt à tout pour de la pâtée",
+      "Un chat-cadeur (chat cascadeur)",
+      "Une boule de poils chat-ractérielle"
+    ], 
+    ans: 1, 
+    fb: "Tommy, leur enfant depuis 4 ans, sait y faire pour avoir de la pâtée 🐱" 
+  },
+  // Question 8
+  { q: "Où Yoann a-t-il fait sa demande en mariage à Clément ? À Annecy ? bravo vous savez lire mais où précisement !",
+    opts: [
+      "À côté de la fontaine de la place Notre-Dame",
+      "Au pied de la statue de Claude Louis Berthollet médecin et chimiste ",
+      "Sur le pont des amours",
+      "Devant le lac"
+    ], 
+    ans: 3, 
+    fb: "Devant le lac — Yoann a mit un genou à terre et Clément a dit oui ! 🌅" 
+  },
+  // Question 9
+  { q: "Quelle est leur destination de rêve ? ✈️", 
+    opts: [
+      "Le Japon",
+      "Saint-Cyr-Sous-Dourdan",
+      "Le Maroc",
+      "L'Islande"
+    ], 
+    ans: 0, 
+    fb: "Le Japon, l'endroit de réve pour s'évader! 🗾" 
+  },
+  // Question 10
+  { q: "Quel film ont-ils regardé le plus ?",
+    opts: [
+      "La vie scolaire",
+      "Alice au pays des merveilles",
+      "Le diable s'habille en Prada",
+      "Harry Potter 7 : Harry Potter et les Reliques de la Mort (1ère partie -  la 2ème est surcôté)"
+    ], 
+    ans: 2, 
+    fb: "Le diable s'habille en Prada, nos deux compères ne se lasseront jamais de Miranda Priestly ! 🍿" 
+  }
 ];
 
 let curQ = 0, score = 0, answered = false;
